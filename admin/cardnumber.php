@@ -19,6 +19,7 @@ require '../inc/dbconnect.php';
                 if($card == $value){
 
                     try {   
+                        
                         $fetch = $conn->prepare("SELECT * FROM registration WHERE card_number = :card_number");
                         $fetch->bindParam(':card_number', $card);
                         $fetch->execute();
@@ -28,7 +29,13 @@ require '../inc/dbconnect.php';
                             $name = $user['firstname'].' '.$user['lastname'];
 
                                 if($usedcard = $card){
-                                    echo $usedcard.' '.'used by'.' '.$name;
+
+                                    $error = $usedcard.' '.'used by'.' '.$name;
+
+                                } else {
+
+                                    $error = "Card already generated";
+
                                 }
         
                         }
@@ -64,13 +71,29 @@ require '../inc/dbconnect.php';
                     $error = $e->getMessage();
                 }
 
-            // 
-
         }
+
+
+       
+
+
 
         $error = "Succesfully Generated";
     }
-        
+
+    try {
+        //Query the database
+        $fetch = $conn->prepare("SELECT * FROM card");
+       // $fetch->bindParam(':card_number', $value);
+        $fetch->execute();
+        $card = $fetch->fetchAll();
+
+       }
+   catch(PDOException $e)
+       {
+           //This will output an error message
+           $error = $e->getMessage();
+       }
 
 ?>
 
@@ -110,7 +133,23 @@ require '../inc/dbconnect.php';
                         <form class="form-signin" method="POST" id="signup-form" action="<?php echo $_SERVER['PHP_SELF']; ?>">
                             <input type="submit" class="btn btn-lg btn-primary btn-block text-uppercase" value="generate">
                         </form>
-                        <hr>
+                        <br>
+
+                        <table class="table text-center">
+                            <thead>
+                                <tr>
+                                <th scope="col">Card Number</th>
+                                </tr>
+                            </thead>
+                            <?php foreach($card as $cardNum){?>
+                            <tbody>
+                                <tr>
+                                <td><?php echo $cardNum['card_number']; ?></td>
+                                </tr>
+                                <tr>
+                            <?php } ?>
+                            </tbody>
+                        </table>
 
                     </div>
                 </div>
