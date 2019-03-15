@@ -4,7 +4,15 @@
 
   
 
-
+      <!-- Footer -->
+      <footer class="sticky-footer bg-white">
+        <div class="container my-auto">
+          <div class="copyright text-center my-auto">
+            <span> &copy; Codekago Interactive 2019</span>
+          </div>
+        </div>
+      </footer>
+      <!-- End of Footer -->
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

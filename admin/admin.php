@@ -4,45 +4,77 @@ session_start();
 
 require '../inc/dbconnect.php';
 
-if(isset($_SESSION["email"])){ 
+  if(isset($_SESSION["email"])){ 
 
-    $email = $_SESSION['email'];
+      $email = $_SESSION['email'];
 
-          try {
+      if(isset($_POST['search']) &&
+      isset($_POST['filter']) &&
+      !empty($_POST['search']) &&
+      !empty($_POST['filter']))
+    {
 
-              $selectApplication = 'SELECT * FROM application INNER JOIN user_details ON application.email = user_details.email ORDER BY id DESC';
+          $search = $_POST['search'];
+          $filter = $_POST['filter'];
+
+          if($filter == 'city'){
+
+            try {
+
+              $selectApplication = 'SELECT * FROM application INNER JOIN user_details ON application.email = user_details.email  WHERE city = :city ORDER BY id DESC';
               $fetchApplication = $conn->prepare($selectApplication);
-              // $fetchApplication->bindValue(':email', $email);
+              $fetchApplication->bindValue(':city', $search);
               $fetchApplication->execute();
               $application = $fetchApplication->fetchAll(PDO::FETCH_ASSOC);
-          
-              }
-
-          catch(PDOException $e)
-              {
-
-                  echo $e->getMessage();
 
               } 
+              catch(PDOException $e)
+                  {
+      
+                      echo $e->getMessage();
+      
+                  } 
 
-            //   try {
+          } elseif($filter == 'state'){
 
-            //     $selectUser = 'SELECT * FROM user_details';
-            //     $fetchUser = $conn->prepare($selectUser);
-            //     // $fetchUser->bindValue(':email', $email);
-            //     $fetchUser->execute();
-            //     $user = $fetchUser->fetchAll(PDO::FETCH_ASSOC);
-            
-            //     }
-    
-            // catch(PDOException $e)
-            //     {
-    
-            //         echo $e->getMessage();
-    
-            //     } 
+              try {
 
-            
+                      $selectApplication = 'SELECT * FROM application INNER JOIN user_details ON application.email = user_details.email  WHERE state = :state ORDER BY id DESC';
+                      $fetchApplication = $conn->prepare($selectApplication);
+                      $fetchApplication->bindValue(':state', $search);
+                      $fetchApplication->execute();
+                      $application = $fetchApplication->fetchAll(PDO::FETCH_ASSOC);
+
+                  }
+      
+              catch(PDOException $e)
+                  {
+      
+                      echo $e->getMessage();
+      
+                  } 
+          }
+
+    } else {
+
+        try {
+
+            $selectApplication = 'SELECT * FROM application INNER JOIN user_details ON application.email = user_details.email ORDER BY id DESC';
+            $fetchApplication = $conn->prepare($selectApplication);
+            // $fetchApplication->bindValue(':email', $email);
+            $fetchApplication->execute();
+            $application = $fetchApplication->fetchAll(PDO::FETCH_ASSOC);
+        
+            }
+
+        catch(PDOException $e)
+            {
+
+                echo $e->getMessage();
+
+            } 
+
+    }        
 
   include 'views/header.php'; 
 
@@ -54,7 +86,7 @@ if(isset($_SESSION["email"])){
           <h1 class="h3 mb-2 text-gray-800">Applications</h1>
           <p class="mb-4"></p> -->
           <div>
-            <form method="POST" action="search.php">
+            <form method="POST" action="<?php echo $_SERVER['PHP_SELF'];?>">
                 <div class="form-row">
                   <div class="col-md-4 mb-3">
                       <input type="text" class="form-control" id="search" name="search" placeholder="Search">
