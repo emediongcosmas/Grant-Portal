@@ -1,11 +1,11 @@
 
-<?php
-    //BEGINS THE SESSION ON THE PAGE
-    session_start();
+<?php session_start();
+
+require 'inc/dbconnect.php';
+
+if(isset($_SESSION["email"])){ 
 
     $email = $_SESSION['email'];
-
-    require 'inc/dbconnect.php';
 
         try {
 
@@ -42,7 +42,7 @@
                 <!-- <button type="button" class="btn btn-success btn-lg" data-toggle="modal" data-target="#applyModal">
                     APPLY
                 </button> -->
-                <a class="btn btn-success btn-lg" href="application.php">APPLY</a>
+                <a class="btn btn-primary" href="application.php"><i class="far fa-share-square"></i> Apply</a>
                 </div>
             </div> 
             <br />  
@@ -88,13 +88,19 @@
                         <tr>
                             
                             <td>
-                                <?php echo $row["project_title"]; ?>
+                                <?php echo $row["project_title"];?>
+                                <?php if($row["status"] == 1){ ?>
+                                    <span class="badge badge-success">Approved</span>
+                                <?php } ?>
                             </td>
                             <td>
                                 <?php echo date('M d, Y h:ia', strtotime($row['timestamp'])); ?>
                             </td>
                             <td>
-                                <input type="button" name="view" value="View Details" id="" class="btn btn-link btn-xs view_details" />
+                                <form method="POST" action="view.php">
+                                    <input type='hidden' value="<?php echo $row["id"]; ?>" id="id" name='id'>
+                                    <input type="submit" name="view" value="View Details" id=" " class="btn btn-link btn-xs view_details" />
+                                </form>
                             </td>
                         </tr>
 
@@ -166,7 +172,30 @@
         </div>
     </div>
 
+    <div id="dataModal" class="modal fade">
+    <div class="modal-dialog">
+    <div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Employee Details</h4>
+    </div>
+    <div class="modal-body" id="employee_detail">
+        
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    </div>
+    </div>
+    </div>
+    </div>
+
 
 </div>
 
-<?php include 'views/footer.php'; ?>
+<?php 
+
+    include 'views/footer.php';
+
+} 
+
+?>

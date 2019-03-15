@@ -14,7 +14,7 @@
             <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
                 <div class="card card-signin my-5 shadow-lg p-3 mb-5 bg-black rounded">
                     <div class="card-body">
-                        <h5 class="card-title text-center">Login</h5>
+                        <h5 class="card-title text-center">LOGIN</h5>
 
                         <div class="text-center">      
                             <!-- Start of Bootstrap alert -->

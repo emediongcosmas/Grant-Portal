@@ -1,9 +1,14 @@
-<?php 
-    session_start();
-    $email = $_SESSION["email"];
-?>
+<?php session_start();
 
-<?php include 'views/header2.php'; ?>
+require 'inc/dbconnect.php';
+
+if(isset($_SESSION["email"])){ 
+
+    $email = $_SESSION['email'];
+
+    include 'views/header2.php';
+
+?>
 
 <div class="container">
     <div class="card border-0 shadow my-5 shadow-lg p-3 mb-5 bg-black rounded">
@@ -174,4 +179,10 @@
     </div>
 </div>
 
-<?php include 'views/footer.php'; ?>
+<?php 
+
+    include 'views/footer.php';
+
+} 
+
+?>

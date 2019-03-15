@@ -4,7 +4,7 @@
     $email = $_SESSION["email"];
 
         require 'dbconnect.php';
-echo $_POST['description'];
+        echo $_POST['description'];
         if($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             //Check if the inputs are set and are not NULL
@@ -20,14 +20,17 @@ echo $_POST['description'];
                 !empty($_POST['budget_total']) &&
                 !empty($_POST['budget_breakdown']) &&
                 !empty($_POST['email']))
-            {
-                var_dump($email);
+            {   
 
                     $projectTitle    = htmlentities($_POST['project_title']);
-                    $description     = htmlentities($_POST['description']);
-                    $amount          = htmlentities($_POST['amount']);
-                    $budgetTotal     = htmlentities($_POST['budget_total']);
-                    $budgetBreakdown = htmlentities($_POST['budget_breakdown']);
+                    $describe        = htmlentities($_POST['description']);
+                    $description     = nl2br($describe);
+                    $amountNumber    = htmlentities($_POST['amount']);
+                    $amount          = number_format($amountNumber);
+                    $budget          = htmlentities($_POST['budget_total']);
+                    $budgetTotal     = number_format($budget);
+                    $budgetbreak     = htmlentities($_POST['budget_breakdown']);
+                    $budgetBreakdown = nl2br($budgetbreak);
                     $email           = htmlentities($_POST['email']);
                     $timestamp       = date("Y-m-d H:i:s");
 

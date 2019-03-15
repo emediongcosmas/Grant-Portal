@@ -1,11 +1,13 @@
 
-<?php
-//BEGINS THE SESSION ON THE PAGE
-session_start();
+<?php session_start();
 
-$email = $_SESSION['email'];
+require 'inc/dbconnect.php';
+
+if(isset($_SESSION["email"])){ 
+
+    $email = $_SESSION['email'];
     
-include 'views/header2.php'; 
+ include 'views/header2.php'; 
 
 ?>
 
@@ -58,7 +60,7 @@ include 'views/header2.php';
                     <div class="form-row">
                         <div class="col-md-6 mb-3">
                             <label for="amount">Amount</label>
-                            <input type="text" class="form-control" id="amount" name="amount" required>
+                            <input type="number" class="form-control" id="amount" name="amount" required>
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="budget_total">Budget Total</label>
@@ -73,15 +75,23 @@ include 'views/header2.php';
                     </div>
                     <div class="form-row text-right">
                         <div class="col-md-12">
-                            <input type="submit" name="cancel" id="cancel" value="CANCEL" class="btn btn-danger" />
-                            <button type="submit" name="cancel" id="cancel" value="CANCEL" class="btn btn-success">SUBMIT</button>
+                            <!-- <input type="submit" name="cancel" id="cancel" value="Cancel" class="btn btn-danger" formaction="home.php"/> -->
+                            <a class="btn btn-danger" href="home.php">Cancel</a>
+                            <button type="submit" name="cancel" id="cancel" value="Submit" class="btn btn-success">Submit</button>
                         </div>
                     </div>
 
                 </form>
+
             </div>
         </div>
     </div>
 </div>
 
-<?php include 'views/footer.php'; ?>
+<?php 
+
+    include 'views/footer.php';
+
+} 
+
+?>

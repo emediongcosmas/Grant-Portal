@@ -14,38 +14,50 @@ require 'dbconnect.php';
                     $password = $_POST['password'];
                     
                     if(filter_var($email, FILTER_VALIDATE_EMAIL)){
+                        
+                        if($email === "admin@admin.com" && $password === "admin001"){
 
-                        try {
-                            // Creates a hash for the passsword
-                            $hash = password_hash($password, PASSWORD_BCRYPT);
+                            //Start a session for the user
+                            $_SESSION["email"] = $email;
+                            $_SESSION["password"] = $password;
 
-                                //Query the database
-                                $fetch = $conn->prepare("SELECT * FROM registration WHERE email = ?");
-                                $fetch->execute([$email]);
-                                $user = $fetch->fetch();
+                            header('Location: admin/admin.php');
 
-                                    //Check to see if the passwords match
-                                    if ($user && password_verify($password, $user['password']))
-                                    { 
-                                        //Start a session for the user
-                                        $_SESSION["email"] = $email;
-                                        $_SESSION["password"] = $hash;
-                                        
-                                        //Redirect to the homepage
-                                        header('Location: home.php');
+                        } else {
 
-                                    } else {
+                            try {
+                                // Creates a hash for the passsword
+                                $hash = password_hash($password, PASSWORD_BCRYPT);
 
-                                       $error = "Invalid Details";
-                                        
-                                    }
-                            }
+                                    //Query the database
+                                    $fetch = $conn->prepare("SELECT * FROM registration WHERE email = ?");
+                                    $fetch->execute([$email]);
+                                    $user = $fetch->fetch();
 
-                        catch(PDOException $e)
-                            {
-                                //This will output an error message
-                                echo $e->getMessage();
-                            }
+                                        //Check to see if the passwords match
+                                        if ($user && password_verify($password, $user['password']))
+                                        { 
+                                            //Start a session for the user
+                                            $_SESSION["email"] = $email;
+                                            $_SESSION["password"] = $hash;
+                                            
+                                            //Redirect to the homepage
+                                            header('Location: home.php');
+
+                                        } else {
+
+                                        $error = "Invalid Details";
+                                            
+                                        }
+                                }
+
+                            catch(PDOException $e)
+                                {
+                                    //This will output an error message
+                                    echo $e->getMessage();
+                                }
+
+                        }
 
                     } else {
 

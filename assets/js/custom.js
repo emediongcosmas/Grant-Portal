@@ -64,8 +64,6 @@ $(document).ready(function() {
         });
     });
 
-
-
     $(document).on('click', '.view_data', function(){
         //$('#dataModal').modal();
         var employee_id = $(this).attr("id");
@@ -78,21 +76,9 @@ $(document).ready(function() {
           $('#dataModal').modal('show');
          }
         });
-       }); 
+       });
+
+
 });
 
-
-$(document).on('click', '.view_data', function(){
-    //$('#dataModal').modal();
-    var employee_id = $(this).attr("id");
-    $.ajax({
-     url:"select.php",
-     method:"POST",
-     data:{employee_id:employee_id},
-     success:function(data){
-      $('#employee_detail').html(data);
-      $('#dataModal').modal('show');
-     }
-    });
-   }); 
   
