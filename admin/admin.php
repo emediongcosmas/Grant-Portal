@@ -10,7 +10,7 @@ if(isset($_SESSION["email"])){
 
           try {
 
-              $selectApplication = 'SELECT * FROM application ORDER BY id DESC';
+              $selectApplication = 'SELECT * FROM application INNER JOIN user_details ON application.email = user_details.email ORDER BY id DESC';
               $fetchApplication = $conn->prepare($selectApplication);
               // $fetchApplication->bindValue(':email', $email);
               $fetchApplication->execute();
@@ -100,7 +100,7 @@ if(isset($_SESSION["email"])){
                     <td width="20%">
                         <form method="POST" action="user-details.php">
                             <input type='hidden' value="<?php echo $user["email"]; ?>" id="id" name='id'>
-                            <input type="submit" name="view" value="<?php echo $user["email"]; ?>" id=" " class="btn btn-link btn-xs view_details" />
+                            <input type="submit" name="view" value="<?php echo $user["firstname"].' '.$user["surname"]; ?>" id=" " class="btn btn-link btn-xs view_details" />
                         </form>
                       </td>
                       <td width="20%">
