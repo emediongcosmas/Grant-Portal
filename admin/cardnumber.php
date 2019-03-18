@@ -8,96 +8,95 @@ require '../inc/dbconnect.php';
 
             try {
 
-               //Query the database
-               $fetch = $conn->prepare("SELECT card_number FROM card WHERE card_number = :card_number");
-               $fetch->bindParam(':card_number', $value);
-               $fetch->execute();
-               $card = $fetch->fetch();
+                // Query the database to check fetch all card from the CARD database
+                $fetch = $conn->prepare("SELECT card_number FROM card WHERE card_number = :card_number");
+                $fetch->bindParam(':card_number', $value);
+                $fetch->execute();
+                $card = $fetch->fetch();
 
-               $card = $card['card_number'];
+                $card = $card['card_number'];
 
-                if($card == $value){
+                    if($card == $value){
 
-                    try {   
-                        
-                        $fetch = $conn->prepare("SELECT * FROM registration WHERE card_number = :card_number");
-                        $fetch->bindParam(':card_number', $card);
-                        $fetch->execute();
-                        $user = $fetch->fetch();
+                        try {   
 
-                            $usedcard = $user['card_number'];
-                            $name = $user['firstname'].' '.$user['lastname'];
+                        // Query the database to check if any of the generated cards have been registered by a user
+                            $fetch = $conn->prepare("SELECT * FROM registration WHERE card_number = :card_number");
+                            $fetch->bindParam(':card_number', $card);
+                            $fetch->execute();
+                            $user = $fetch->fetch();
 
-                                if($usedcard = $card){
+                                $usedcard = $user['card_number'];
+                                $name = $user['firstname'].' '.$user['lastname'];
 
-                                    $error = $usedcard.' '.'used by'.' '.$name;
+                                    if($usedcard = $card){
 
-                                } else {
+                                        $error = $usedcard.' '.'used by'.' '.$name;
 
-                                    $error = "Card already generated";
+                                    } else {
 
-                                }
-        
-                        }
-                    catch(PDOException $e)
-                        {
-                            //This will output an error message
-                            $error = $e->getMessage();
-                        }
+                                        $error = "Card already generated";
 
-
-                    
-                } else{
-                    
-                    try {
-                            $insertQuery = "INSERT INTO card (card_number) VALUES ( :card_number)";
-                            $insertNumber = $conn->prepare($insertQuery);
-                            $insertNumber->bindParam(':card_number', $value);
-                            $insertNumber->execute();
+                                    }
             
                             }
                         catch(PDOException $e)
                             {
-                                //This will output an error message
                                 $error = $e->getMessage();
                             }
 
-                }
+
+                        
+                    } else{
+                        
+                        try {
+                        
+                        // Insert the number generated into the database if it doesn not exist already in any database
+                                $insertQuery = "INSERT INTO card (card_number) VALUES ( :card_number)";
+                                $insertNumber = $conn->prepare($insertQuery);
+                                $insertNumber->bindParam(':card_number', $value);
+                                $insertNumber->execute();
+                
+                                }
+                            catch(PDOException $e)
+                                {
+                                    $error = $e->getMessage();
+                                }
+
+                    }
 
                 }
+
             catch(PDOException $e)
+                
                 {
-                    //This will output an error message
                     $error = $e->getMessage();
                 }
 
         }
 
-
-       
-
-
-
         $error = "Succesfully Generated";
+
     }
 
     try {
-        //Query the database
-        $fetch = $conn->prepare("SELECT * FROM card ORDER BY id DESC");
-       // $fetch->bindParam(':card_number', $value);
+
+    // This will fetch all existing numbers from the database
+        $fetch = $conn->prepare("SELECT * FROM card ORDER BY id DESC LIMIT 0, 50 ");
         $fetch->execute();
         $card = $fetch->fetchAll();
 
        }
-   catch(PDOException $e)
+
+    catch(PDOException $e)
        {
-           //This will output an error message
            $error = $e->getMessage();
        }
 
-?>
 
-<?php include 'views/header.php'; ?>
+    include 'views/header.php';
+
+?>
 
     <div class="container">
         <div class="row">
@@ -136,9 +135,9 @@ require '../inc/dbconnect.php';
                         <br>
 
                         <table class="table text-center">
-                            <thead>
+                            <thead class="table-borderless">
                                 <tr>
-                                <th scope="col">Card Number</th>
+                                <th scope="col">SCRATCH CARD NUMBERS</th>
                                 </tr>
                             </thead>
                             <?php foreach($card as $cardNum){?>

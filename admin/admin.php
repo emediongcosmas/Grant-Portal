@@ -85,6 +85,7 @@ require '../inc/dbconnect.php';
           <!-- Page Heading
           <h1 class="h3 mb-2 text-gray-800">Applications</h1>
           <p class="mb-4"></p> -->
+          
           <div>
             <form method="POST" action="<?php echo $_SERVER['PHP_SELF'];?>">
                 <div class="form-row">
