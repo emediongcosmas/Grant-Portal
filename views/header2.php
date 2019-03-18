@@ -20,7 +20,7 @@
 
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm p-3 mb-5 bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm p-3 mb-5 bg-dark ">
         <div class="container">
             <a class="navbar-brand" href="home.php"><h4>Grant Portal</h4></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">

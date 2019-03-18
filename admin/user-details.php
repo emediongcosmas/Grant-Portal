@@ -47,7 +47,7 @@ include 'views/header.php';
             <div class="card-body p-5">
               <div class="table-responsive ">
 
-              <table class="table table-hover">
+              <table class="table table-hover table-borderless">
                     <thead>
                         <tr>
                             <th><h1 class="font-weight-light">Personal Information</h1></th>
@@ -107,7 +107,7 @@ include 'views/header.php';
                     </tbody>
                 </table>
 
-                <table class="table table-hover">
+                <table class="table table-hover table-borderless">
                     <thead>
                         <tr>
                             <th width="40%"><h1 class="font-weight-light">Education</h1></th>
@@ -129,7 +129,7 @@ include 'views/header.php';
                     </tbody>
                 </table>
 
-                <table class="table table-hover">
+                <table class="table table-hover table-borderless">
                     <thead>
                         <tr>
                             <th width="40%"><h1 class="font-weight-light">Work Experience</h1></th>

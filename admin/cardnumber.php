@@ -83,7 +83,7 @@ require '../inc/dbconnect.php';
 
     try {
         //Query the database
-        $fetch = $conn->prepare("SELECT * FROM card");
+        $fetch = $conn->prepare("SELECT * FROM card ORDER BY id DESC");
        // $fetch->bindParam(':card_number', $value);
         $fetch->execute();
         $card = $fetch->fetchAll();
