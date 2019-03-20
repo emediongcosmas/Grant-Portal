@@ -2,32 +2,25 @@
 
 require 'inc/dbconnect.php';
 
-if(isset($_SESSION["email"])){
+if (isset($_SESSION["email"])) {
 
     $email = $_SESSION["email"];
 
-    
+
 
     try {
 
         $selectUser = 'SELECT * FROM user_details WHERE email = :email';
-            $fetchUser = $conn->prepare($selectUser);
-            $fetchUser->bindValue(':email', $email);
-            $fetchUser->execute();
-            $user = $fetchUser->fetchAll(PDO::FETCH_ASSOC);
-            
-            
-    }
-
-    catch(PDOException $e) {
+        $fetchUser = $conn->prepare($selectUser);
+        $fetchUser->bindValue(':email', $email);
+        $fetchUser->execute();
+        $user = $fetchUser->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
 
         echo $e->getMessage();
-
     }
 
-
-
-    include 'views/header2.php'; 
+    include 'views/header2.php';
 
 ?>
 
@@ -35,16 +28,18 @@ if(isset($_SESSION["email"])){
     <div class="card border-0 shadow my-5 shadow-lg p-3 mb-5 bg-black rounded">
         <div class="card-body p-5">
             <div>
-                <table class="table table-hover">
+                <table class="table table-hover table-borderless">
                     <thead>
                         <tr>
-                            <th><h1 class="font-weight-light">Personal Information</h1></th>
+                            <th>
+                                <h1 class="font-weight-light">Personal Information</h1>
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
-                    <?php foreach($user as $user){ ?>
+                        <?php foreach ($user as $user) { ?>
                         <tr>
-                            <th scope="row"  width="40%">Surname:</th>
+                            <th scope="row" width="40%">Surname:</th>
                             <td><?php echo $user['surname']; ?></td>
                         </tr>
                         <tr>
@@ -91,19 +86,21 @@ if(isset($_SESSION["email"])){
                             <th scope="row">State:</th>
                             <td><?php echo $user['state']; ?></td>
                         </tr>
-                   
+
                     </tbody>
                 </table>
 
-                <table class="table table-hover">
+                <table class="table table-hover table-borderless">
                     <thead>
                         <tr>
-                            <th width="40%"><h1 class="font-weight-light">Education</h1></th>
+                            <th width="40%">
+                                <h1 class="font-weight-light">Education</h1>
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <th scope="row" >Institution:</th>
+                            <th scope="row">Institution:</th>
                             <td><?php echo $user['institution']; ?></td>
                         </tr>
                         <tr>
@@ -117,10 +114,12 @@ if(isset($_SESSION["email"])){
                     </tbody>
                 </table>
 
-                <table class="table table-hover">
+                <table class="table table-hover table-borderless">
                     <thead>
                         <tr>
-                            <th width="40%"><h1 class="font-weight-light">Work Experience</h1></th>
+                            <th width="40%">
+                                <h1 class="font-weight-light">Work Experience</h1>
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -140,18 +139,11 @@ if(isset($_SESSION["email"])){
                             <th scope="row">To:</th>
                             <td><?php echo $user['work_end']; ?></td>
                         </tr>
-                        <?php }?>
+                        <?php 
+                    } ?>
                     </tbody>
-                </table> 
-            
-                <!-- <form role="form" method="POST" id="registration" action="inc/process.php">
-                    
-                    <div class="form-row">
-                        <div class=" col-md-12 mb-3 text-right">
-                            <button class="btn btn-primary btn-lg" type="submit" id="save" name="submit" value="save">Save</button>
-                        </div>
-                    </div>  
-                </form> -->
+                </table>
+
             </div>
         </div>
     </div>
@@ -159,8 +151,7 @@ if(isset($_SESSION["email"])){
 
 <?php 
 
-include 'views/footer.php'; 
-    
+include 'views/footer.php';
 }
 
-?>
+?> 
