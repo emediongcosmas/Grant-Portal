@@ -61,24 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $error = "Succesfully Generated";
 }
 
-// This is a query to fetch all the generated numbers from the database
-
-// try {
-
-//     // This will fetch all existing numbers from the database
-//     $fetch = $conn->prepare("SELECT * FROM card ORDER BY id DESC LIMIT 0, 50 ");
-//     $per_page = 50;
-//     $fetch->execute();
-//     $card = $fetch->fetchAll();
-
-//     } 
-
-// catch (PDOException $e) {
-//     $error = $e->getMessage();
-// }
-
-
-// NEW QUERY FOR PAGINATION
+// BEGINNING OF PROCESSING FOR PAGINATION
 $per_page = 100;
 
 try {
@@ -160,6 +143,7 @@ include 'views/header.php';
                     </form>
                     <br>
 
+                    <!-- Beginning of table that shows the generated cards -->
                     <table class="table text-center css-serial">
                         <thead class="table-borderless">
                             <tr>
@@ -178,10 +162,13 @@ include 'views/header.php';
                             } ?>
                         </tbody>
                     </table>
+                    <!-- End of table that shows the generated cards -->
 
+                    <!-- Beginning of pagination -->
                     <?php for ($page = 1; $page <= $page_number; $page++) {
                         echo '<a href="cardnumber.php?page=' . $page . '">' . $page . " " . '</a>';
                     } ?>
+                    <!-- End of pagination -->
 
                 </div>
             </div>

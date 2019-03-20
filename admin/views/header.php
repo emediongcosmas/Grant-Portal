@@ -44,11 +44,6 @@
       <!-- Divider -->
       <hr class="sidebar-divider">
 
-      <!-- Heading -->
-        <!-- <div class="sidebar-heading">
-          Applications
-        </div> -->
-
       <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
         <a class="nav-link" href="admin.php">
@@ -68,11 +63,6 @@
 
       <!-- Divider -->
       <hr class="sidebar-divider">
-
-      <!-- Sidebar Toggler (Sidebar) -->
-      <!-- <div class="text-center d-none d-md-inline">
-        <button class="rounded-circle border-0" id="sidebarToggle"></button>
-      </div> -->
 
     </ul>
     <!-- End of Sidebar -->
