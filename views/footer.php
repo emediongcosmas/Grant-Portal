@@ -8,7 +8,7 @@
       <footer class="sticky-footer bg-white">
         <div class="container my-auto">
           <div class="copyright text-center my-auto">
-            <span> &copy; Codekago Interactive 2019</span>
+            <span> Copyright &copy; 2019 Emediong Cosmas. All rights reserved.</span>
           </div>
         </div>
       </footer>
