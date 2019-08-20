@@ -5,13 +5,13 @@
   
 
       <!-- Footer -->
-      <footer class="sticky-footer bg-white">
+      <!-- <footer class="sticky-footer bg-white">
         <div class="container my-auto">
           <div class="copyright text-center my-auto">
             <span> Copyright &copy; 2019 Emediong Cosmas. All rights reserved.</span>
           </div>
         </div>
-      </footer>
+      </footer> -->
       <!-- End of Footer -->
 
     <!-- Optional JavaScript -->
